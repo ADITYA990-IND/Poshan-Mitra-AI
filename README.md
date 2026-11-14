@@ -126,3 +126,70 @@ poshan-mitra-ai/
         ├── FeedbackView.tsx         # 1–5 star community feedback & privacy-safe feed
         ├── AddChildModal.tsx        # Modal to register a new child
         └── ConfirmDeleteModal.tsx   # In-app confirmation modal for child deletion
+```
+
+## 🔒 Firestore Data Model & Security
+
+| Collection / Document Path | Purpose | Access Control (`firestore.rules`) |
+| :--- | :--- | :--- |
+| `/users/{userId}` | Non-PII worker display profile (`displayName`, `centerCode`, `photoUrl`) | Owner-only read & write |
+| `/users/{userId}/private/profile` | Worker PII (email, phone, gender, address, district, pincode) | Strict owner-only read & write |
+| `/users/{userId}/children/{childId}` | Child nutrition records, growth history & follow-up logs | Owner-only read, create, update & delete |
+| `/feedbacks/{feedbackId}` | Shared community ratings & reviews (`authorName`, `rating`, `comment`) | Signed-in read, verified create, owner-only delete (Zero PII exposed) |
+
+## ⚙️ Getting Started (Local Development)
+
+### 1. Prerequisites
+- **Node.js** v20+
+- **npm** (or compatible package manager)
+- A **Google Gemini API Key** (from Google AI Studio)
+- A **Firebase Project** with Google Authentication and Cloud Firestore enabled
+
+### 2. Clone & Install
+```bash
+git clone [https://github.com/ADITYA990-IND/poshan-mitra-ai.git](https://github.com/ADITYA990-IND/poshan-mitra-ai.git)
+cd poshan-mitra-ai
+npm install
+```
+3. Configure Environment Variables
+Copy .env.example to .env:
+
+Bash
+cp .env.example .env
+Update .env with your credentials:
+
+Code snippet
+GEMINI_API_KEY="your_gemini_api_key_here"
+APP_URL="http://localhost:3000"
+4. Configure Firebase
+Ensure firebase-applet-config.json contains your Firebase web configuration (apiKey, authDomain, projectId, appId, firestoreDatabaseId) and deploy firestore.rules to your Firestore database.
+
+5. Run Development Server
+Bash
+npm run dev
+The application and API server will launch together at http://localhost:3000.
+
+6. Build for Production
+Bash
+# Type-check
+npm run lint
+
+# Build frontend and server bundle
+npm run build
+
+# Start production server
+NODE_ENV=production npm start
+
+---
+
+<div align="center">
+
+### 💡 Built with Vision & Passion
+*Empowering grassroots healthcare workers and transforming child nutrition management across rural India.*
+
+<img src="https://img.shields.io/badge/Status-Active_Development-success?style=for-the-badge" alt="Status" />
+<img src="https://img.shields.io/badge/Open_Source-Contribution_Welcome-blue?style=for-the-badge" alt="Open Source" />
+
+<p>Developed with ❤️ by <b>Aditya Raj Chourasiya</b></p>
+
+</div>
