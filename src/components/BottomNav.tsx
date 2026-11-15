@@ -1,4 +1,4 @@
-import { Users, ClipboardCheck, MessageSquareHeart, BookOpen, User, Star } from 'lucide-react';
+import { Users, ClipboardCheck, MessageSquareHeart, BookOpen, User, Star,Activity} from 'lucide-react';
 import type { Language, TabId } from '../types.ts';
 import { UI_TEXT } from '../i18n/translations.ts';
 
@@ -27,6 +27,11 @@ export function BottomNav({
       icon: ClipboardCheck,
       badge: pendingFollowUpCount,
     },
+    {
+      id: 'risk-check',
+      label: pick('त्वरित जांच', 'तुरंत जांच', 'Quick Check'),
+      icon: Activity,
+    },
     { id: 'chat', label: pick('AI चैट', 'AI चैट', 'AI Chat'), icon: MessageSquareHeart },
     { id: 'guide', label: pick('पोषण', 'पोषण', 'Guide'), icon: BookOpen },
     { id: 'profile', label: pick('प्रोफ़ाइल', 'प्रोफ़ाइल', 'Profile'), icon: User },
@@ -36,7 +41,7 @@ export function BottomNav({
   return (
     <nav
       aria-label={t.navChildren}
-      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 min-h-[60px] pb-[env(safe-area-inset-bottom)] bg-white/95 backdrop-blur-md border-t border-[#DCE4DB] grid grid-cols-6 items-center px-0.5"
+      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 min-h-[60px] pb-[env(safe-area-inset-bottom)] bg-white/95 backdrop-blur-md border-t border-[#DCE4DB] grid grid-cols-7 items-center px-0.5"
     >
       {tabs.map((tab) => {
         const Icon = tab.icon;
